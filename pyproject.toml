@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "whypass"
+version = "0.1.0"
+description = "A claim-discipline linter for text: catch assertions that outrun their evidence, and claims that contradict your record. Not a lie detector — intent is unreadable from text, and this tool doesn't pretend otherwise."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{ name = "Illia Hladkyi" }]
+keywords = ["deception", "hallucination", "linter", "llm", "claims", "epistemics", "honesty"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.scripts]
+whypass = "whypass.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/myfjin/whypass"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/whypass"]
