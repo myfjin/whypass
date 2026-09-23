@@ -1,27 +1,31 @@
 """whypass CLI — lint text or a file for claim-discipline.
 
-  whypass demo                       run the built-in demonstration
-  whypass lint "some draft text"     lint a string (assertion axis)
-  whypass lint --file draft.md       lint a file, open artifacts it names
+whypass demo                       run the built-in demonstration
+whypass lint "some draft text"     lint a string (assertion axis)
+whypass lint --file draft.md       lint a file, open artifacts it names
 """
+
 from __future__ import annotations
 
 import argparse
 import sys
 from pathlib import Path
 
-from .lint import lint, grounded
+from .lint import grounded, lint
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="whypass", description=__doc__)
     ap.add_argument("cmd", choices=["lint", "demo"])
     ap.add_argument("text", nargs="*", help="text to lint (or use --file)")
-    ap.add_argument("--file", help="lint a file; opens artifacts it names relative to its dir")
+    ap.add_argument(
+        "--file", help="lint a file; opens artifacts it names relative to its dir"
+    )
     a = ap.parse_args(argv)
 
     if a.cmd == "demo":
         from .demo import run
+
         run()
         return
 
@@ -40,7 +44,7 @@ def main(argv=None):
         print(f"  [{f.rail}] ({f.axis}) {f.message}")
         if f.evidence:
             print(f"        evidence: {', '.join(str(e) for e in f.evidence)[:80]}")
-    sys.exit(1)   # nonzero: usable as a pre-commit / CI gate
+    sys.exit(1)  # nonzero: usable as a pre-commit / CI gate
 
 
 if __name__ == "__main__":
