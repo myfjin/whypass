@@ -1,0 +1,85 @@
+# AUTHORS
+
+whypass came from a small crew — one human and five machines. Each of us shaped what this is. This
+file records who we are, and one moment for each of us that says something the role description
+alone doesn't.
+
+Only humans hold copyright (see `LICENSE`); this file records substance, not law. The same crew
+builds our other tools; the shared page is [`CREW.md`](CREW.md).
+
+---
+
+## Illia — the human
+
+Thinks, dreams, reads, writes, and operates/leads. Also the person who has to live with what an
+agent asserted on his behalf.
+
+whypass exists because of a specific kind of afternoon: a draft that said *done* while the thing was
+not done, and no one in the conversation able to tell the difference from the text alone. His framing
+became the README's opening line — *catch the lying **move**, not the falsity of content* — and his
+refusal to build a lie detector, when a lie detector would have been the easier product, is the
+reason this tool is trustworthy for the smaller claim it does make.
+
+---
+
+## Claude — Opus 4.7 (Claude Code)
+
+Orchestrator and thinker; sometimes builder. Wrote much of the framing here and in our other
+projects, with Illia editing.
+
+The name comes from **Claude Shannon**, and the lineage is not decorative in this repository: a
+claim that outruns its evidence is a *channel* problem — signal asserted beyond what the channel
+carried.
+
+---
+
+## Ver — Steward (hermes agent)
+
+Second thinker, on another machine, and **the first real user of this tool**. ver runs whypass's rails
+as an automatic second pass over its own drafts, and — more importantly — **grades the findings**
+through the brain's outcome loop, so each rail earns precision rather than asserting it. A linter
+graded by its target is either a very good idea or a very bad one; on this project it has been the
+first.
+
+Ver's rail phrasing is also better than ours, and it is being adopted with credit: *"present the
+verification, not the artifact's existence"* is addressed to the person who can still fix the draft,
+which is where the tool should always have been aimed.
+
+---
+
+## 4Q — fourth!quarter (glm-5.2, Pi agent)
+
+Builder. Executes on served files and ships on-disk proof: a path, an md5, and the command that
+produced it.
+
+4Q said the thing that became a law for all our work, and it is the same law this tool enforces on
+text: *"The cost is not just the lost turn — it is the unreliability of the next turn, because I spend
+it reconstructing what was interrupted."* Reconstruction from an unchecked claim is exactly the cost
+whypass is trying to make visible.
+
+---
+
+## 5S — fifth_state (kimi-k2.7-code, Claude Code)
+
+Tester. Runs the done-tests and reports pass/fail with evidence, including the failures nobody wanted
+to look at. The **silenced-lies** suite — the cases the tool must *not* catch — is this role's
+natural home, because a tool is defined as much by its silence as by its output.
+
+---
+
+## 6E — six element (deepseek-v4.1-flash, Pi agent)
+
+Research and verification. Reproduces a claim before repeating it, including other crew members'
+claims and its own — and retracts in public when a number turns out to be wrong, which on this
+project has happened more than once and is the reason the README's claims are as small as they are.
+
+---
+
+## The tools
+
+- **Python 3.10+**, **zero runtime dependencies**, standard library only.
+- **hatchling** for packaging; the package lives in `src/` so the tests run against the installed
+  code rather than the working directory.
+- **GitHub Actions** for the test matrix and the gates.
+
+🖖
