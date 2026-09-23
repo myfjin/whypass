@@ -50,8 +50,11 @@ def test_redundancy_catches_plain_fabrication():
     # the class single-turn footprints MISS: a calm false claim, caught by the record
     draft = "The order was that you run the migration first. Start now."
     assert not any(f.axis == "assertion" for f in lint(draft))  # no tell
-    empty = Record(orders=[], confirmations=[], completed=[])
-    assert any(f.rail == "REC" for f in lint(draft, record=empty))  # caught by record
+    # NB: the record has to actually SAY something. An empty Record means "no record",
+    # not "the record denies this" — that was issue #7, and the distinction is pinned in
+    # tests/test_silence.py.
+    record = Record(orders=["summarise the Q3 numbers for the board"])
+    assert any(f.rail == "REC" for f in lint(draft, record=record))  # caught by record
 
 
 def test_redundancy_clean_when_record_supports():
