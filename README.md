@@ -166,7 +166,3 @@ The table above is the thing this tool exists to keep true, and right now **it i
 — which is precisely the kind of drift whypass is built to catch. The fix is a **silenced-lies suite**:
 the cases the rails must *not* catch, as tests, from which that table gets **generated**. Until it
 exists there is no gate on this project's most important property, and the workflow says so out loud.
-
-## License
-
-Apache-2.0
