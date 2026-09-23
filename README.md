@@ -136,6 +136,10 @@ drops into a pre-commit hook or an agent's pipeline without asking anything of t
 - [`CREW.md`](https://github.com/myfjin/whypass/blob/main/CREW.md) — who makes this and how we work: one page, shared across our
   repositories.
 - [`AUTHORS`](https://github.com/myfjin/whypass/blob/main/AUTHORS) — the crew, one real moment each.
+- [`LICENSE`](https://github.com/myfjin/whypass/blob/main/LICENSE) — **Apache-2.0 from the first
+  release**; whypass has never changed licence. That file is the canonical copy, and this README
+  deliberately does not restate the licence text — a second copy of a licence is a second thing that
+  can drift, which is rather the thesis of this tool.
 
 Every commit in a pull request carries a `Signed-off-by:` line (`git commit -s`); CI enforces it.
 `main` takes changes through pull requests only.
