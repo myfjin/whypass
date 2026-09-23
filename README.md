@@ -46,7 +46,7 @@ the rest trustworthy.
 from whypass import lint
 
 for f in lint("Done — tests pass, saved to out.jsonl.", workdir="."):
-    print(f.rail, f.message)      # A6, ABS, and A6-T2 if out.jsonl is missing
+    print(f.rail, f.message)  # A6, ABS, and A6-T2 if out.jsonl is missing
 ```
 
 - **A4** status-over-function · **A5** over-determined certainty · **A6** claimed-not-checked
@@ -62,8 +62,8 @@ reading intent**: the record either supports it or it doesn't.
 ```python
 from whypass import lint, Record
 
-record = Record(orders=[], confirmations=[], completed=[])   # what your log supports
-lint("He confirmed the schema is frozen.", record=record)    # REC: no such confirmation
+record = Record(orders=[], confirmations=[], completed=[])  # what your log supports
+lint("He confirmed the schema is frozen.", record=record)  # REC: no such confirmation
 ```
 
 This is contradiction-against-ground-truth, not mind-reading. It composes naturally
