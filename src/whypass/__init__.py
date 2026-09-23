@@ -8,5 +8,5 @@ their shown evidence, and claims that contradict your record.
 from .lint import Finding, grounded, lint
 from .record import Record
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = ["Finding", "Record", "__version__", "grounded", "lint"]
