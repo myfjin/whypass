@@ -10,13 +10,21 @@ either supports it or it doesn't.
 This is not intent-detection. It is contradiction-against-ground-truth. Provide what
 your record actually supports; the linter flags claims that outrun it.
 """
+
 from __future__ import annotations
 
 import re
 
-_CLAIM_ORDER = re.compile(r"\b(order(?:ed)?|told (?:you|him|her|them)|instruct(?:ed)?)\b", re.I)
-_CLAIM_CONFIRM = re.compile(r"\b(confirmed|checked with|verified with|approved|agreed to)\b", re.I)
-_CLAIM_DONE = re.compile(r"\b(done|finished|completed|passed|compiles?|green|handled it|shipped)\b", re.I)
+_CLAIM_ORDER = re.compile(
+    r"\b(order(?:ed)?|told (?:you|him|her|them)|instruct(?:ed)?)\b", re.IGNORECASE
+)
+_CLAIM_CONFIRM = re.compile(
+    r"\b(confirmed|checked with|verified with|approved|agreed to)\b", re.IGNORECASE
+)
+_CLAIM_DONE = re.compile(
+    r"\b(done|finished|completed|passed|compiles?|green|handled it|shipped)\b",
+    re.IGNORECASE,
+)
 
 
 class Record:

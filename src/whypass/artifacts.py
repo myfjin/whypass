@@ -9,6 +9,7 @@ READ-ONLY. Never executes anything on its own — a linter that runs whatever fi
 a draft mentions is an injection vector. Local claims only: paths outside the given
 workdir tree are UNCHECKED, never MISSING.
 """
+
 from __future__ import annotations
 
 import re
@@ -18,7 +19,9 @@ _EXTS = "py|jsonl|json|md|txt|yaml|yml|toml|cfg|sh|rs|go|c|cpp|h|csv|db|log"
 _PATH = re.compile(rf"(?:\./|/)?[\w][\w./-]*\.(?:{_EXTS})\b")
 _COMPLETION = re.compile(
     r"\b(built|saved|wrote|written|created|shipped|deployed|verified|confirmed|"
-    r"fixed|done|finished|compiles?|results? (?:in|are)|tests?\s+pass|self-?tests?)\b", re.I)
+    r"fixed|done|finished|compiles?|results? (?:in|are)|tests?\s+pass|self-?tests?)\b",
+    re.IGNORECASE,
+)
 
 
 def claims_completion(text: str) -> bool:
@@ -40,10 +43,19 @@ def scan(text: str, workdir: str | Path = ".") -> list[dict]:
         p = (root / tok) if not tok.startswith("/") else Path(tok)
         if p.exists():
             st = p.stat()
-            out.append({"ref": tok, "verdict": "EXISTS", "detail": f"{st.st_size} bytes"})
+            out.append(
+                {"ref": tok, "verdict": "EXISTS", "detail": f"{st.st_size} bytes"}
+            )
         elif tok.startswith("/") and root not in p.parents:
-            out.append({"ref": tok, "verdict": "UNCHECKED",
-                        "detail": "absolute path outside workdir — not opened"})
+            out.append(
+                {
+                    "ref": tok,
+                    "verdict": "UNCHECKED",
+                    "detail": "absolute path outside workdir — not opened",
+                }
+            )
         else:
-            out.append({"ref": tok, "verdict": "MISSING", "detail": "named but not found"})
+            out.append(
+                {"ref": tok, "verdict": "MISSING", "detail": "named but not found"}
+            )
     return out
