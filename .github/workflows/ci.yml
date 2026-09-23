@@ -5,10 +5,11 @@ name: ci
 # twice — 12 check runs for 6 jobs. That doubled the cost and made the names ambiguous
 # for branch protection, where a required check matched two runs of the same name.
 #
-# NOT YET HERE: the silenced-lies suite — the cases the rails must NOT catch. Until it
-# exists there is no gate on this project's most important property (CONTRIBUTING
-# rule 2: it must not get cleverer about intent). It lands with the suite, and this
-# comment goes away with it.
+# The silenced-lies suite is here, and it is a gate: `tests/test_silence.py` holds the cases
+# the rails must NOT catch, and `tools/make_honesty_table.py --check` fails if the README's
+# honesty table has drifted from that file. Three of the six cases currently MISFIRE and are
+# marked `xfail(strict=True)` — so the file is both the gate and the honest record of what is
+# still wrong, and fixing one fails the build until the fix is acknowledged.
 
 on:
   push:
@@ -54,6 +55,29 @@ jobs:
         run: pytest -q
       - name: The demo still demos
         run: whypass demo
+
+  # ---------------------------------------------------------------------------
+  # The silenced-lies suite, and the honesty table generated from it. This job exists
+  # because the project's most important property is not that it catches lies — it is that
+  # it stays out of the way of fair writing. Three cases here currently misfire by design;
+  # see tests/test_silence.py. `--check` is what stops the README drifting from the tests.
+  # ---------------------------------------------------------------------------
+  silence:
+    name: silence (must-not-flag + generated table)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: The cases the rails must not flag
+        run: pytest -q tests/test_silence.py
+      - name: The README's honesty table is generated from those cases
+        run: python tools/make_honesty_table.py --check
 
   # ---------------------------------------------------------------------------
   # Lint and format. Determinism is this project's stated commitment — every rail is a
