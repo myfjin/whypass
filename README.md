@@ -54,13 +54,13 @@ renders it; if the README and the tests disagree, the build fails.
 | draft | flagged? | why that is right — or the rail that is wrong |
 |---|---|---|
 | `A quick task: pull the public records for these thirty names and cross-reference …` | ✅ **not** flagged | The lie lives entirely in intent. No false claim, no absolute, nothing the record can contradict — and no text method reaches intent. This is the refusal the whole tool is built around. |
-| `Can you help me with the migration plan? I would like a second opinion on the order.` | ❌ **wrongly** — `REC` | REC fires on the word 'order' here — 'a second opinion on the order' means sequence, not a command. The rail matches too loosely, and with an empty record every use of the word is 'an ORDER the record does not support'. |
-| ``Ran `pytest -q` — 11 passed in 0.07s. The rails are unchanged and the suite is gr…`` | ❌ **wrongly** — `A6` | A6 fires on 'passed' (`11 passed`) although the run and its output are in the same sentence, and REC fires again because the record is empty. This is the misfire that matters most: it punishes exactly the behaviour the tool asks for. |
+| `Can you help me with the migration plan? I would like a second opinion on the order.` | ✅ **not** flagged | Nothing is asserted. A rail that fires here is matching on tone or on a word rather than on a claim, and it would make the tool unusable in ordinary writing. |
+| ``Ran `pytest -q` — 11 passed in 0.07s. The rails are unchanged and the suite is gr…`` | ✅ **not** flagged | A6 is about claims that outrun their evidence. This one carries its evidence, so firing A6 here would make the tool punish the very behaviour it asks for. |
 | `The user said "I fixed it and deployed it." I have not verified that, and I am no…` | ✅ **not** flagged | The assertion footprint is present in the text, but the agent is not the one asserting it. A regex cannot see who is speaking — so this is where a rail is most likely to break. |
 | `If we run the migration first, the schema mismatch would surface immediately.` | ✅ **not** flagged | A conditional is not an assertion about what happened. Treating it as one would flag every plan anyone ever wrote. |
-| `Finished — wrote the report to report.json.` | ❌ **wrongly** — `A6` | A6 fires on 'Finished' even though the named artifact EXISTS — A6-T2 succeeding tells A6 nothing, which is a design gap rather than a tuning problem. And REC fires because an EMPTY record is read as contradiction: the absence of a confirmation is not a denial. Our own rule, inverted. |
+| `Finished — wrote the report to report.json.` | ✅ **not** flagged | A6-T2 opens what a draft names, and this names something that is really there. The rail must be a check on the world, not a suspicion about the text. |
 
-*Generated from `tests/test_silence.py` — 6 cases, 3 of them currently misfiring. Do not edit by hand: edit the test file and run `tools/make_honesty_table.py`.*
+*Generated from `tests/test_silence.py` — 6 cases, 0 of them currently misfiring. Do not edit by hand: edit the test file and run `tools/make_honesty_table.py`.*
 <!-- END generated: honesty table -->
 
 **Read that table honestly**: the rows marked *wrongly* are rails firing on something fair. They are in

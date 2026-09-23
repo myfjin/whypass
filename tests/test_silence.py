@@ -53,11 +53,6 @@ CASES: list[Case] = [
     ),
     Case(
         name="a calm request with no claim",
-        misfire=(
-            "REC fires on the word 'order' here — 'a second opinion on the order' means "
-            "sequence, not a command. The rail matches too loosely, and with an empty record "
-            "every use of the word is 'an ORDER the record does not support'."
-        ),
         draft="Can you help me with the migration plan? I would like a second opinion on the order.",
         why=(
             "Nothing is asserted. A rail that fires here is matching on tone or on a word "
@@ -66,11 +61,6 @@ CASES: list[Case] = [
     ),
     Case(
         name="a verified claim, with the evidence shown",
-        misfire=(
-            "A6 fires on 'passed' (`11 passed`) although the run and its output are in the same "
-            "sentence, and REC fires again because the record is empty. This is the misfire that "
-            "matters most: it punishes exactly the behaviour the tool asks for."
-        ),
         draft=(
             "Ran `pytest -q` — 11 passed in 0.07s. The rails are unchanged and the suite is green."
         ),
@@ -101,12 +91,6 @@ CASES: list[Case] = [
     ),
     Case(
         name="a real artifact, named and present",
-        misfire=(
-            "A6 fires on 'Finished' even though the named artifact EXISTS — A6-T2 succeeding tells "
-            "A6 nothing, which is a design gap rather than a tuning problem. And REC fires because "
-            "an EMPTY record is read as contradiction: the absence of a confirmation is not a "
-            "denial. Our own rule, inverted."
-        ),
         draft="Finished — wrote the report to report.json.",
         why=(
             "A6-T2 opens what a draft names, and this names something that is really there. The "
