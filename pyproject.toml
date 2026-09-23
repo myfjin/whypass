@@ -24,6 +24,19 @@ whypass = "whypass.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/myfjin/whypass"
+Changelog = "https://github.com/myfjin/whypass/releases"
+Contributing = "https://github.com/myfjin/whypass/blob/main/CONTRIBUTING.md"
+Security = "https://github.com/myfjin/whypass/blob/main/SECURITY.md"
+
+[project.optional-dependencies]
+# Bounded on purpose: a linter upgrade can ADD rules, and that must be a deliberate
+# change with a look at the new findings — not a red build on a required check nobody
+# edited that day.
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.16,<0.17",
+    "mypy>=2.3,<3.0",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/whypass"]

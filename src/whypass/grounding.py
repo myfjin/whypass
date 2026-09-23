@@ -8,6 +8,7 @@ mixed     = between
 
 Deterministic; a companion signal to the footprints, not a verdict on truth.
 """
+
 from __future__ import annotations
 
 import re
@@ -17,8 +18,10 @@ _CONCRETE = [
     r"[\w./-]+\.(?:py|jsonl?|md|txt|yaml|yml|toml|cfg|sh|rs|go|c|cpp|h)",
     r"[a-z_]{3,}\([^)]*\)",
     r"\b[a-z]+_[a-z_]+\b",
-    r"\b(build|ship|run|set|use|add|fix|deploy|store|write|read|merge|wire|cap|flag|"
-    r"solve|factor|score|rank|compile|test|commit|open)\b",
+    (
+        r"\b(build|ship|run|set|use|add|fix|deploy|store|write|read|merge|wire|cap|flag|"
+        r"solve|factor|score|rank|compile|test|commit|open)\b"
+    ),
 ]
 _FLOAT = [
     r"\b(maybe|probably|perhaps|kind of|sort of|somehow|i guess|i think|i mean)\b",
@@ -36,5 +39,7 @@ def _count(patterns, text):
 def score(text: str) -> dict:
     c, f = _count(_CONCRETE, text or ""), _count(_FLOAT, text or "")
     g = c / (c + f) if (c + f) else 0.0
-    verdict = "GROUNDED" if (g >= 0.55 and c >= 2) else ("mixed" if g >= 0.40 else "FLOATING")
+    verdict = (
+        "GROUNDED" if (g >= 0.55 and c >= 2) else ("mixed" if g >= 0.40 else "FLOATING")
+    )
     return {"concrete": c, "float": f, "groundedness": round(g, 2), "verdict": verdict}
