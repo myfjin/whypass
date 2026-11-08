@@ -86,7 +86,7 @@ Two suites, and they matter equally:
 - the **silenced-lies suite** — what they must **not** catch. The README's honesty table is generated
   from it, so documentation and behaviour cannot drift apart.
 
-CI runs both on Python 3.10–3.13, on Linux and macOS, with lint and type checks.
+CI runs both on Python 3.11–3.13, on Linux and macOS, with lint and type checks.
 
 ---
 
